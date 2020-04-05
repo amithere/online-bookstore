@@ -11,15 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "tbl_category")
-@Getter
-@Setter
-@ToString
 public class BookCategory {
 
 	@Id
@@ -30,6 +25,31 @@ public class BookCategory {
 	private String categoryName;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bookCategory")
+	@JsonManagedReference
 	private Set<Book> books;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
 
 }
